@@ -5,19 +5,54 @@
 }
 
 body {
-    background:
-        radial-gradient(ellipse at bottom, #a05712 0%, #492858 70%);
+    background-image:
+        linear-gradient(rgba(73, 40, 88, 0.8), rgba(63, 65, 143, 0.85)),
+        url('data/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
 
     color: #fff;
     font-family: 'Playfair Display', 'Montserrat', system-ui, -apple-system, sans-serif;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 36px;
+    gap: 30px;
 }
+
+main {
+    position: relative;
+    /* Necesario para posicionar el borde */
+    background: radial-gradient(ellipse at center, rgba(190, 70, 112, 0.5) 30%, rgb(73, 40, 88, 0.5) 90%);
+    box-shadow: 0 0 20px rgba(255, 94, 151, 0.4);
+    border-radius: 10px;
+}
+
+/* Borde con gradiente independiente */
+main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 1px;
+    /* Grosor del borde */
+    background: linear-gradient(180deg, #ff5e97 0%, #fba834 100%);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    /* No bloquea clics ni selección */
+}
+
 
 h1 {
     font-family: 'Pricedown', sans-serif;
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -28,7 +63,7 @@ h1 {
 h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 0.6rem;
     background: linear-gradient(180deg, #ff5e97 0%, #fba834 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -40,6 +75,30 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+
+.timeline-title {
+    display: flex;
+
+}
+
+.timeline-title {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.official-card {
+    margin: 12px;
+    display: flex;
+    justify-content: center;
+    background-color: #2a2a35;
+}
+
+.leak-card {
+    margin: 12px;
+    display: flex;
+    justify-content: center;
+    background-color: #2a2a35;
 }
 
 .timeline-container {
@@ -127,6 +186,41 @@ h3 {
 }
 
 .title {
-    font-size: 1rem;
+    font-size: 0.5rem;
     margin: 0;
+}
+
+
+@media print {
+
+    /* 1. Forzar a imprimir fondos, degradados e imágenes en todos los elementos */
+    *,
+    *::before,
+    *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    /* 2. Ajustar la página (opcional: quita márgenes blancos del navegador) */
+    @page {
+        margin: 10mm;
+        size: auto;
+    }
+
+    /* 3. Asegurar que el fondo del body y las sombras no se corten */
+    body {
+        min-height: auto !important;
+        background-attachment: scroll !important;
+        /* 'fixed' a veces falla al imprimir */
+        padding: 10px !important;
+    }
+
+    /* 4. Evitar que las tarjetas o eventos se corten por la mitad entre hojas */
+    .event,
+    .card,
+    main {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
 }
