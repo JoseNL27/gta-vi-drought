@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>The GTA VI Drought</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Cargar fuentes de Google Fonts -->
+  <!-- Cargar fuentes de Google Fonts -->
+  <link href="https://fonts.cdnfonts.com/css/pricedown" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800;0,900;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <div class="title-container">
+      <h1>The</h1>
+      <svg class="logo" width="200">
+        <image href="./data/GTAVI.svg" />
+      </svg>
+      <h1> Drought</h1>
+    </div>
+    <h3>A timeline of leaks and official announcements</h3>
+  </header>
+
+  <div class="timeline-container" id="timeline">
+    <!-- Datos cargados dinámicamente o a mano -->
+  </div>
+
+  <script>
+    // Tu lista de eventos (Año-Mes-Día)
+    const events = [
+      { date: "2018-03-06", title: "Project Americas Leak (The Know)", type: "leak" },
+      { date: "2020-04-15", title: "Kotaku reporta desarrollo temprano", type: "official" },
+      { date: "2022-02-04", title: "Rockstar confirma desarrollo activo", type: "official" },
+      { date: "2022-09-18", title: "Mega Leak: 90 vídeos filtrados", type: "leak" },
+      { date: "2023-11-08", title: "Anuncio del tráiler para diciembre", type: "official" },
+      { date: "2023-12-04", title: "Tráiler 1 publicado", type: "official" },
+      { date: "2025-05-02", title: "Take-Two reconfirma ventana 2025", type: "official" }
+    ];
+
+    const container = document.getElementById('timeline');
+    const PIXELS_PER_DAY = 0.8; // Ajusta esto para dar más o menos espacio a la sequía
+
+    let prevDate = null;
+
+    events.forEach((item) => {
+      const currentDate = new Date(item.date);
+      const eventEl = document.createElement('div');
+      eventEl.className = `event ${item.type}`;
+
+      // Si hay un evento anterior, calculamos el espacio vacío proporcional a los días pasados
+      if (prevDate) {
+        const diffTime = Math.abs(currentDate - prevDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const marginTop = diffDays * PIXELS_PER_DAY;
+        eventEl.style.marginTop = `${marginTop}px`;
+      }
+
+      prevDate = currentDate;
+
+      eventEl.innerHTML = `
+      <div class="card">
+        <div class="date">${item.date}</div>
+        <p class="title">${item.title}</p>
+      </div>
+    `;
+
+      container.appendChild(eventEl);
+    });
+  </script>
+
+</body>
+
+</html>

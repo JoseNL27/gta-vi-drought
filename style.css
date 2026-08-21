@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at bottom, #a05712 0%, #492858 70%);
+
+    color: #fff;
+    font-family: 'Playfair Display', 'Montserrat', system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-family: 'Pricedown', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 94, 151, 0.4);
+
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    background: linear-gradient(180deg, #ff5e97 0%, #fba834 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 10px 0;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.timeline-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* La línea central */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: #2a2a35;
+    transform: translateX(-50%);
+}
+
+.event {
+    position: relative;
+    width: 50%;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+
+/* Eventos Oficiales a la izquierda */
+.event.official {
+    left: 0;
+    text-align: right;
+}
+
+/* Leaks a la derecha */
+.event.leak {
+    left: 50%;
+    text-align: left;
+}
+
+/* El círculo en la línea */
+.event::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.event.official::after {
+    right: -8px;
+    background: #00ff88;
+    box-shadow: 0 0 10px #00ff88;
+}
+
+.event.leak::after {
+    left: -8px;
+    background: #ff3366;
+    box-shadow: 0 0 10px #ff3366;
+}
+
+.card .title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card {
+    background: #181820;
+    border: 1px solid #2a2a35;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    max-width: 90%;
+}
+
+.date {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.title {
+    font-size: 1rem;
+    margin: 0;
+}
