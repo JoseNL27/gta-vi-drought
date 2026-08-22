@@ -31,6 +31,12 @@ main {
     border-radius: 10px;
 }
 
+.card-title {
+    color: #fff;
+    -webkit-text-fill-color: white;
+    font-size: 1rem;
+}
+
 /* Borde con gradiente independiente */
 main::before {
     content: "";
@@ -68,7 +74,6 @@ h3 {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 0 0 10px 0;
 }
 
 .title-container {
@@ -88,23 +93,31 @@ h3 {
 }
 
 .official-card {
+    box-shadow: 0 0 10px rgba(255, 94, 151, 0.4);
     margin: 12px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
     background-color: #2a2a35;
 }
 
 .leak-card {
+
+    box-shadow: 0 0 10px rgba(255, 94, 151, 0.4);
     margin: 12px;
     display: flex;
     justify-content: center;
+    padding: 12px;
+    border-radius: 12px;
     background-color: #2a2a35;
 }
 
 .timeline-container {
     position: relative;
     width: 100%;
-    max-width: 800px;
+
 }
 
 /* La línea central */
@@ -179,7 +192,7 @@ h3 {
 }
 
 .date {
-    font-size: 0.85rem;
+    font-size: 0.55rem;
     font-weight: bold;
     color: #888;
     margin-bottom: 4px;

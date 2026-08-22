@@ -33,12 +33,12 @@
 
       <div class="official-card">
 
-        <h3 class="date">Official Statements</h3>
+        <h3 class="card-title">Official Statements</h3>
       </div>
 
       <div class="leak-card">
 
-        <h3 class="date">Leaks</h3>
+        <h3 class="card-title">Leaks</h3>
 
       </div>
 
@@ -52,39 +52,75 @@
     // Tu lista de eventos (Año-Mes-Día)
     const events = [
       { date: "2018-03-06", title: "Project Americas Leak (The Know)", type: "leak" },
-      { date: "2020-04-15", title: "Kotaku reporta desarrollo temprano", type: "official" },
-      { date: "2022-02-04", title: "Rockstar confirma desarrollo activo", type: "official" },
-      { date: "2022-09-18", title: "Mega Leak: 90 vídeos filtrados", type: "leak" },
-      { date: "2023-11-08", title: "Anuncio del tráiler para diciembre", type: "official" },
-      { date: "2023-12-04", title: "Tráiler 1 publicado", type: "official" },
-      { date: "2025-05-02", title: "Take-Two reconfirma ventana 2025", type: "official" }
+      { date: "2018-10-24", title: "Dan Houser mentions GTA VI", type: "official" },
+      { date: "2021-11-19", title: "GTA VI house leak on GTA Trilogy datamine", type: "leak" },
+      { date: "2022-02-04", title: "Rockstar confirms active development of GTA VI", type: "official" },
+      { date: "2022-07-07", title: "Rockstar announces moving resources towards next Grand Theft Auto entry", type: "official" },
+      { date: "2022-07-27", title: "Jason Schreier reveals female protagonist and Miami setting", type: "leak" },
+      { date: "2022-09-19", title: "Teapot Megaleak", type: "leak" },
+      { date: "2023-11-08", title: "Jason Schreier states Trailer 1 to be announced", type: "leak" },
+      { date: "2023-11-08", title: "Rockstar Games announces official GTA VI reveal trailer on December", type: "official" },
+      { date: "2023-12-01", title: "Trailer 1 date announced", type: "official" },
+      { date: "2023-12-03", title: "TikTok leak", type: "leak" },
+      { date: "2023-12-04", title: "Trailer 1 leaks on twitter", type: "leak" },
+      { date: "2023-12-04", title: "Trailer 1 releases", type: "official" },
+      { date: "2024-02-28", title: "Rockstar employees back to office", type: "leak" },
+      { date: "2024-05-16", title: "Take-two confirms launch windows on 'Fall 2025'", type: "official" },
+      { date: "2024-09-17", title: "GTA VI save profile files added to GTA V accidentally", type: "leak" },
+      { date: "2025-01-01", title: "Janitor leak", type: "leak" },
+      { date: "2025-02-02", title: "Official discord server releases with GTA VI channel", type: "official" },
+      { date: "2025-04-03", title: "PlayStation recieves artworks and game description", type: "leak" },
+      { date: "2025-04-19", title: "Gameroll reveals Jason and Lucia last names", type: "leak" },
+      { date: "2025-05-02", title: "Rockstar announces delay to May 26th 2026", type: "official" },
+      { date: "2025-05-02", title: "Trailer 2 + 70 screenshots", type: "official" },
+      { date: "2025-06-08", title: "GameRoll gameplay details leak", type: "leak" },
+      { date: "2025-09-08", title: "GTA VI-related domains registered", type: "leak" },
+      { date: "2025-11-06", title: "Rockstar announces delay to November 19th 2026", type: "official" },
+      { date: "2025-11-30", title: "Ex-employer animation clip", type: "leak" },
+      { date: "2026-01-08", title: "Rockstar confirms employee fired over GTA VI leak", type: "official" },
+      { date: '2026-05-21', title: 'Strauss Zelnick states "exciting marketing this summer"', type: 'official' },
+      { date: "2026-06-18", title: "Cover Art reveal + Pre-orders announcement", type: "official" },
+      { date: "2026-06-24", title: "Ultimate & Standard Edition revealed + 63 screenshots", type: "official" },
+      { date: "2026-06-25", title: "Pre-orders begin", type: "official" },
+      { date: "2026-08-06", title: '"An Extended Look" announced', type: "official" },
+      { date: "2026-08-18", title: "Cyberleek #1 and #2 videos + Full Map", type: "leak" },
+      { date: "2026-08-19", title: "Cyberleek #3 and #4 videos", type: "leak" },
+      { date: "2026-08-20", title: "Cyberleek #5 video", type: "leak" },
+      { date: "2026-08-21", title: "Cyberleek #6 video", type: "leak" }
     ];
 
-    const container = document.getElementById('timeline');
-    const PIXELS_PER_DAY = 0.8; // Ajusta esto para dar más o menos espacio a la sequía
+    events.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    let prevDate = null;
+    const container = document.getElementById('timeline');
+
+    const PIXELS_PER_DAY = 0.8;
+
+    const firstDate = new Date(events[0].date);
+    const lastDate = new Date(events[events.length - 1].date);
+
+    const totalDays =
+      (lastDate - firstDate) / (1000 * 60 * 60 * 24);
+
+    container.style.height = `${totalDays * PIXELS_PER_DAY + 200}px`;
 
     events.forEach((item) => {
+
       const currentDate = new Date(item.date);
+
+      const diffTime = currentDate - firstDate;
+      const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
       const eventEl = document.createElement('div');
+
       eventEl.className = `event ${item.type}`;
 
-      // Si hay un evento anterior, calculamos el espacio vacío proporcional a los días pasados
-      if (prevDate) {
-        const diffTime = Math.abs(currentDate - prevDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const marginTop = diffDays * PIXELS_PER_DAY;
-        eventEl.style.marginTop = `${marginTop}px`;
-      }
-
-      prevDate = currentDate;
+      eventEl.style.top = `${diffDays * PIXELS_PER_DAY}px`;
 
       eventEl.innerHTML = `
-      <div class="card">
-        <div class="date">${item.date}</div>
-        <p class="title">${item.title}</p>
-      </div>
+        <div class="card">
+            <div class="date">${item.date}</div>
+            <p class="title">${item.title}</p>
+        </div>
     `;
 
       container.appendChild(eventEl);
